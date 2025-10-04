@@ -1,4 +1,4 @@
-# Xpenso
+# Xpenso - Expense Management
 
 Xpenso is a modern expense management web application built with Next.js and TypeScript. It provides role-based dashboards and features for Admins, Managers, and Employees to manage expenses, approvals, users, and settings efficiently.
 
@@ -88,3 +88,4 @@ Xpenso/
 | **Atharv Virmani** | [github.com/Atharv-15](https://github.com/Atharv-15) |
 
 
+`` Thanks to odooxamalthea - Odoo Hackathon 2025 ``
