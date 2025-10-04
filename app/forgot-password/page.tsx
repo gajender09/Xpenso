@@ -17,7 +17,7 @@ export default function ForgotPasswordPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Mock password reset - in production, this would send an email
-    console.log(`[v0] Password reset email sent to: ${email}`)
+    console.log(`Password reset email sent to: ${email}`)
     setIsSubmitted(true)
   }
 
