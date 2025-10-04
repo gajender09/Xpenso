@@ -48,7 +48,7 @@ export default function SignupPage() {
       // Store base currency in environment/localStorage for demo
       localStorage.setItem("baseCurrency", selectedCountry.currency)
       localStorage.setItem("currencySymbol", selectedCountry.symbol)
-      console.log(`[v0] Company base currency set to: ${selectedCountry.currency} (${selectedCountry.symbol})`)
+      console.log(`Company base currency set to: ${selectedCountry.currency} (${selectedCountry.symbol})`)
     }
 
     // Mock signup - redirect to admin dashboard

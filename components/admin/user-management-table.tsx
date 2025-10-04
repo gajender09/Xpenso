@@ -56,8 +56,8 @@ export function UserManagementTable() {
   }
 
   const handleSendPassword = (user: (typeof mockUsers)[0]) => {
-    console.log(`[v0] Sending password email to ${user.email}`)
-    console.log(`[v0] Generated password: ${user.password}`)
+    console.log(`Sending password email to ${user.email}`)
+    console.log(`Generated password: ${user.password}`)
     alert(
       `Password sent to ${user.email}\n\nDemo Password: ${user.password}\n\n(In production, this would be sent via email)`,
     )
@@ -77,7 +77,7 @@ export function UserManagementTable() {
       password: newPassword,
     }
     setUsers([...users, newUser])
-    console.log(`[v0] New user created with password: ${newPassword}`)
+    console.log(`New user created with password: ${newPassword}`)
     alert(
       `User created successfully!\n\nEmail: ${userData.email}\nPassword: ${newPassword}\n\n(Password would be sent via email in production)`,
     )
