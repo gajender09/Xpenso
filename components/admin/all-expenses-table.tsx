@@ -126,8 +126,8 @@ export function AllExpensesTable() {
                       className="gap-1 bg-transparent"
                       onClick={() => handleOverride(expense.id)}
                     >
-                      <Shield className="h-4 w-4" />
-                      Override
+                      <input type="checkbox" value="Override" />
+                      Required
                     </Button>
                   </TableCell>
                 </TableRow>

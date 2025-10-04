@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Plus, X } from "lucide-react"
+import { ArrowRight, Pencil, Plus, X } from "lucide-react"
 
 const defaultSteps = ["Manager", "Finance", "Director"]
 
@@ -45,9 +45,10 @@ export function ApprovalFlowBuilder() {
                   {steps.length > 1 && (
                     <button
                       onClick={() => removeStep(index)}
-                      className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute cursor-pointer -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                      <X className="h-3 w-3" />
+                      <X className="h-3 w-3 text-black" />
+                      <Pencil className="h-3 w-3 text-green-900" />
                     </button>
                   )}
                 </div>
@@ -55,6 +56,7 @@ export function ApprovalFlowBuilder() {
               </div>
             ))}
           </div>
+          <p className="text-sm">Minimum Approval Percentage: <u>60</u> %</p>
 
           <div className="pt-4 border-t border-border">
             <h4 className="text-sm font-medium mb-3">Flow Rules</h4>
