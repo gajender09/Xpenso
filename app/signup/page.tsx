@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation" // For navigation in App Router
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,8 +21,9 @@ export default function SignupPage() {
     country: "",
   })
   const [error, setError] = useState("")
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
 
@@ -42,18 +43,36 @@ export default function SignupPage() {
       return
     }
 
-    // Get selected country's currency
-    const selectedCountry = countries.find((c) => c.code === formData.country)
-    if (selectedCountry) {
-      // Store base currency in environment/localStorage for demo
-      localStorage.setItem("baseCurrency", selectedCountry.currency)
-      localStorage.setItem("currencySymbol", selectedCountry.symbol)
-      console.log(`Company base currency set to: ${selectedCountry.currency} (${selectedCountry.symbol})`)
-    }
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          country: formData.country, // Use country code directly
+        }),
+      })
 
-    // Mock signup - redirect to admin dashboard
-    alert(`Admin account created successfully!\nBase currency: ${selectedCountry?.currency}`)
-    window.location.href = "/admin"
+      const data = await res.json()
+      if (res.ok) {
+        // Store the token and currency info
+        localStorage.setItem("token", data.token)
+        const selectedCountry = countries.find((c) => c.code === formData.country)
+        if (selectedCountry) {
+          localStorage.setItem("baseCurrency", selectedCountry.currency)
+          localStorage.setItem("currencySymbol", selectedCountry.symbol)
+          console.log(`Company base currency set to: ${selectedCountry.currency} (${selectedCountry.symbol})`)
+        }
+
+        // Redirect to admin dashboard
+        router.push("/admin")
+      } else {
+        setError(data.error || "Signup failed")
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.")
+    }
   }
 
   return (
@@ -161,7 +180,7 @@ export default function SignupPage() {
 
             <div className="mt-4 text-center text-sm">
               <span className="text-muted-foreground">Already have an account? </span>
-              <Link href="/" className="text-primary hover:underline">
+              <Link href="/login" className="text-primary hover:underline">
                 Login
               </Link>
             </div>

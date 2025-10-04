@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Plus, X } from "lucide-react"
+import { useState } from "react"
 
 const defaultSteps = ["Manager", "Finance", "Director"]
 
@@ -44,6 +44,8 @@ export function ApprovalFlowBuilder() {
                   </Badge>
                   {steps.length > 1 && (
                     <button
+                      type="button"
+                      aria-label={`Remove step ${step}`}
                       onClick={() => removeStep(index)}
                       className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                     >

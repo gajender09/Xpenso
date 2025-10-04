@@ -1,21 +1,29 @@
 "use client"
 
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { CheckSquare, LayoutDashboard, LogOut, Receipt, Settings, Users } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { LayoutDashboard, Receipt, CheckSquare, Users, Settings, LogOut } from "lucide-react"
 
 interface NavbarProps {
   role: "employee" | "manager" | "admin"
   pendingCount?: number
+  name?: string // Add this line
 }
 
-export function Navbar({ role, pendingCount = 0 }: NavbarProps) {
+export function Navbar({ role, pendingCount = 0, name }: NavbarProps) {
   const pathname = usePathname()
 
-  const getNavItems = () => {
-    const baseItems = [{ href: `/${role}`, label: "Dashboard", icon: LayoutDashboard }]
+  type NavItem = {
+    href: string;
+    label: string;
+    icon: typeof LayoutDashboard;
+    badge?: number;
+  };
+
+  const getNavItems = (): NavItem[] => {
+    const baseItems: NavItem[] = [{ href: `/${role}`, label: "Dashboard", icon: LayoutDashboard }]
 
     if (role === "employee") {
       baseItems.push({ href: `/${role}/expenses`, label: "My Expenses", icon: Receipt })
@@ -56,7 +64,7 @@ export function Navbar({ role, pendingCount = 0 }: NavbarProps) {
                 const Icon = item.icon
                 const isActive = pathname === item.href
                 return (
-                  <Link key={item.href} href={item.href}>
+                  <Link key={item.href + item.label} href={item.href}>
                     <Button variant={isActive ? "secondary" : "ghost"} className="gap-2">
                       <Icon className="h-4 w-4" />
                       {item.label}
@@ -72,8 +80,15 @@ export function Navbar({ role, pendingCount = 0 }: NavbarProps) {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground capitalize hidden sm:inline">{role}</span>
-            <Button variant="ghost" size="icon" onClick={() => (window.location.href = "/")}>
+            <span className="text-sm text-muted-foreground capitalize hidden sm:inline">
+              {name ? name : role}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Logout"
+              onClick={() => (window.location.href = "/")}
+            >
               <LogOut className="h-4 w-4" />
             </Button>
           </div>
