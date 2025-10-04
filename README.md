@@ -2,6 +2,8 @@
 
 Xpenso is a modern expense management web application built with Next.js and TypeScript. It provides role-based dashboards and features for Admins, Managers, and Employees to manage expenses, approvals, users, and settings efficiently.
 
+### Video Walkthrough - https://youtu.be/UQmNoFBIV9s
+
 ## Features
 
 - **Role-based Dashboards:**
@@ -76,3 +78,13 @@ Xpenso/
 - `lib/` — Utility functions (e.g., country list, helpers)
 - `public/` — Static files and images
 - `styles/` — Global styles
+
+## 👨‍💻 Team Members
+
+| Name | GitHub Profile |
+|------|----------------|
+| **GAJENDER** | [github.com/gajender09](https://github.com/gajender09) |
+| **Sameer Gautam** | [github.com/shribreeze](https://github.com/shribreeze) |
+| **Atharv Virmani** | [github.com/Atharv-15](https://github.com/Atharv-15) |
+
+
